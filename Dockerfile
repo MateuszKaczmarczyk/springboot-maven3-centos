@@ -50,18 +50,10 @@ RUN mkdir -p /.npm
 ###
 COPY ./s2i/bin/ /tmp/s2i/bin
 
-##### DODANE - INACZEJ SIE SYPIE
-##RUN mkdir /opt/app-root
-################################
-##RUN chown -R 1001:0 /opt/app-root
-##USER 1001
-
-### EKPERYMENT
 RUN chown -R 1001:0 /tmp/s2i/bin
 RUN chown -R 1001:0 /tmp/?/.m2/repository
 RUN chown -R 1001:0 /tmp/.m2/repository
 RUN chown -R 1001:0 /.npm
-
 
 USER 1001
 

@@ -9,22 +9,16 @@ echo "--> # MVN_ARGS = $MVN_ARGS"
 
 function mvn-there() {
   DIR="$1"
-    shift
-      (cd $DIR; mvn "$@")     
-      } 
-      
+  shift
+  (cd $DIR; mvn "$@")
+ }
 
-#if [ -f "mvnw" ]; then
-#  ./mvnw clean install $MVN_ARGS -Dmaven.repo.local=/tmp/.m2
-#else
-#  mvn clean install $MVN_ARGS -Dmaven.repo.local=/tmp/.m2
-#fi
 
 
 if [ -f "mvnw" ]; then
-  ./mvn-there /tmp clean install $MVN_ARGS -Dmaven.repo.local=/tmp/.m2/repository
+  ./mvn-there /tmp clean install $MVN_ARGS
 else
-  mvn-there /tmp clean install $MVN_ARGS -Dmaven.repo.local=/tmp/.m2/repository
+  mvn-there /tmp clean install $MVN_ARGS
 fi
 
 # Fix source directory permissions
