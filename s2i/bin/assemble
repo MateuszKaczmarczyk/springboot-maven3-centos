@@ -1,17 +1,31 @@
 #!/bin/bash
 
 set -e
-
 echo "---> Installing application source"
-cp -Rf /tmp/src/. ./
+cp -Rf /tmp/src/. /tmp
 
 echo "---> Building Spring Boot application from source"
 echo "--> # MVN_ARGS = $MVN_ARGS"
+
+function mvn-there() {
+  DIR="$1"
+    shift
+      (cd $DIR; mvn "$@")     
+      } 
+      
+
+#if [ -f "mvnw" ]; then
+#  ./mvnw clean install $MVN_ARGS -Dmaven.repo.local=/tmp/.m2
+#else
+#  mvn clean install $MVN_ARGS -Dmaven.repo.local=/tmp/.m2
+#fi
+
+
 if [ -f "mvnw" ]; then
-  ./mvnw clean install $MVN_ARGS
+  ./mvn-there /tmp clean install $MVN_ARGS -Dmaven.repo.local=/tmp/.m2/repository
 else
-  mvn clean install $MVN_ARGS
+  mvn-there /tmp clean install $MVN_ARGS -Dmaven.repo.local=/tmp/.m2/repository
 fi
 
 # Fix source directory permissions
-fix-permissions ./
+#fix-permissions /tmp
